@@ -12,19 +12,20 @@ app.use(morgan('short', {stream: accessLogStream}));
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(express.static('public'));
 
-app.all('*', function(){
-    console.log('request');
+app.all('*', function(req, res, next){
+    next();
 })
 
 app.get('/', function(req, res){
-    console.log(1);
     console.log(req.hostname);
 //    if(req.hostname !== 'www.jingruoyu.com'){
 //        return;
 //    }
-    res.sendFile('~/front-end/vue/dist/index.html');
-    res.sendStatus(200);
+	// res.send('this is a request')
+	console.log(__dirname)
+    res.sendFile(__dirname + "/dist/index.html");
     res.end();
 })
 
