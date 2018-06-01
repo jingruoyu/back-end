@@ -12,7 +12,7 @@ app.use(morgan('short', {stream: accessLogStream}));
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use(express.static('public'));
+app.use(express.static(__dirname + "/dist"));
 
 app.all('*', function(req, res, next){
     next();
@@ -25,7 +25,7 @@ app.get('/', function(req, res){
 //    }
 	// res.send('this is a request')
 	console.log(__dirname)
-    res.sendFile(__dirname + "/dist/index.html");
+    res.sendFile("/dist/index.html");
     res.end();
 })
 
